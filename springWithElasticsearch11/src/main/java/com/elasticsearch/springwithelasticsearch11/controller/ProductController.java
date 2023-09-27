@@ -66,4 +66,18 @@ public class ProductController {
         return productList;
     }
 
+    @GetMapping("/boolQuery/{productId}/{qty}")
+    public List<Product> boolQuerySearch (@PathVariable String productId, @PathVariable Integer qty) throws IOException {
+        SearchResponse<Product> searchResponse = elasticSearchService.boolQueryProducts(productId, qty);
+        List<Hit<Product>> hitList = searchResponse.hits().hits();
+        List<Product> productList = new ArrayList<>();
+
+        hitList.forEach(item -> {
+            assert item.source() != null;
+            productList.add(item.source());
+        });
+
+        return productList;
+    }
+
 }
