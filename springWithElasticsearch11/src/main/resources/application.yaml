@@ -1,4 +1,5 @@
 spring:
   data:
     elasticsearch:
+      cluster-name: productService
       cluster-nodes: localhost:9200
