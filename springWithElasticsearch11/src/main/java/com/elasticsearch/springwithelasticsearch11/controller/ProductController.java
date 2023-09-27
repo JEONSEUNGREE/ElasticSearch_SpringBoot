@@ -52,4 +52,18 @@ public class ProductController {
         return productList;
     }
 
+    @GetMapping("/autoSuggest/{approximateProductName}")
+    public List<String> autoSuggestSearch (@PathVariable String approximateProductName) throws IOException {
+        SearchResponse<Product> searchResponse = elasticSearchService.autoSuggestProduct(approximateProductName);
+        List<Hit<Product>> hitList = searchResponse.hits().hits();
+        List<String> productList = new ArrayList<>();
+
+        hitList.forEach(item -> {
+            assert item.source() != null;
+            productList.add(item.source().getName());
+        });
+
+        return productList;
+    }
+
 }
