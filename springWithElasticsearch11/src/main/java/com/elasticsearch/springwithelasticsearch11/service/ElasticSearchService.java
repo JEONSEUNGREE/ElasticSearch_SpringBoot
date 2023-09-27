@@ -31,4 +31,12 @@ public class ElasticSearchService {
         System.out.println("elasticsearch auto suggestion query " + supplier.get().toString());
         return response;
     }
+
+    public SearchResponse<Product> boolQueryProducts(String productName, Integer qty) throws IOException {
+        Supplier<Query> supplier = ElasticSearchUtil.createSupplierQueryForBoolQuery(productName, qty);
+        SearchResponse<Product> response = elasticsearchClient
+                .search(s -> s.index("products").query(supplier.get()), Product.class);
+        System.out.println("elasticsearch bool query " + supplier.get().toString());
+        return response;
+    }
 }
