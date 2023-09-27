@@ -24,6 +24,9 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    // ElasticsearchClient Json library
+    // https://mvnrepository.com/artifact/jakarta.json/jakarta.json-api
+    implementation 'jakarta.json:jakarta.json-api:2.0.1'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
